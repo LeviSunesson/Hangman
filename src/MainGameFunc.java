@@ -3,7 +3,7 @@ import java.util.*;
 public class MainGameFunc {
 
 	public static int DIFFICULTY;
-	
+
 	private static Scanner input = new Scanner(System.in);
 
 	public static void Start() {
