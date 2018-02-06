@@ -5,7 +5,7 @@ public class GameStart {
 
 		// Launch game
 
-		MainGameFunc.Start();
+		MainGameFunc.Run();
 
 	}
 

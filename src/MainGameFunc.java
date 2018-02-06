@@ -4,8 +4,16 @@ public class MainGameFunc {
 
 	public static int DIFFICULTY;
 
+	public static int LIVES;
+	
 	private static Scanner input = new Scanner(System.in);
 
+	public static void Run() {
+		
+		Start();	
+		
+	}
+	
 	public static void Start() {
 
 		System.out.println("Welcome to HangMan!");
@@ -22,6 +30,10 @@ public class MainGameFunc {
 
 		System.out.println("difficulty choosen: " + DIFFICULTY);
 
+		LIVES = 10/DIFFICULTY;
+		
 	}
+	
+	
 
 }
