@@ -11,10 +11,10 @@ public class MainGameFunc {
 	public static void Run() {
 		
 		Start();	
-		
+		Questions();
 	}
 	
-	public static void Start() {
+	private static void Start() {
 
 		System.out.println("Welcome to HangMan!");
 
@@ -34,6 +34,16 @@ public class MainGameFunc {
 		
 	}
 	
+	private static void Questions() {
+		
+		while( LIVES > 0 ) {
+			
+			
+			
+			
+			
+		}
+	}
 	
 
 }
