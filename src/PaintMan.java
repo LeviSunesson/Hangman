@@ -1,6 +1,7 @@
 
 public class PaintMan {
 
+
 	public static void print0() {
 
 		System.out.println("  ______  ");
@@ -117,5 +118,4 @@ public class PaintMan {
 		System.out.println("###       ");
 
 	}
-
 }
