@@ -70,13 +70,13 @@ public class MainGameFunc {
 			}
 
 			printCharArr(found);
-
+			
 			if ( wrong == false ) {
 
 				lives--;
 
 			}
-
+			
 			wrong = false;
 
 			System.out.println("");
@@ -120,14 +120,3 @@ public class MainGameFunc {
 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
