@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.*;
 
 public class MainGameFunc {
@@ -8,7 +10,7 @@ public class MainGameFunc {
 	
 	private static Scanner input = new Scanner(System.in);
 
-	public static void Run() {
+	public static void Run() throws FileNotFoundException {
 		
 		Start();	
 		Questions();
@@ -34,16 +36,44 @@ public class MainGameFunc {
 		
 	}
 	
-	private static void Questions() {
+	private static void Questions() throws FileNotFoundException {
+		
+		String secretWord = GetWord(new File("Words.txt"));
 		
 		while( LIVES > 0 ) {
 			
+			System.out.println("Guess a letter!");
 			
-			
-			
+			System.out.println(secretWord);
 			
 		}
+		
 	}
 	
+	private static String GetWord(File Words) throws FileNotFoundException {
+		
+		Scanner fileReader = new Scanner(Words);
+		
+		ArrayList<String> words = new ArrayList<String>();
 
+		while ( fileReader.hasNextLine() ) {
+			words.add(fileReader.nextLine());
+		}
+		
+		fileReader.close();
+		
+		return words.get((int) (Math.random()*words.size()));
+	
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
