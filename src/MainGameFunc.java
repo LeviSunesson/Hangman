@@ -39,8 +39,7 @@ public class MainGameFunc {
 	private static void Questions() throws FileNotFoundException {
 
 		String secretWord = GetWord(new File("Words.txt"));
-		char[] secret = secretWord.toCharArray();
-		char[] found = secret;
+		char[] found = secretWord.toCharArray();
 		for(int i = 0 ; i < found.length ; i++) {
 			found[i] = '_';
 		}
@@ -55,7 +54,7 @@ public class MainGameFunc {
 			String guessedString = input.next();
 			guessedString = guessedString.toUpperCase();
 
-			for (int i = 0 ; i < secret.length ; i++) {
+			for (int i = 0 ; i < found.length ; i++) {
 				if ( guessedString.charAt(0) == secretWord.charAt(i) ) {
 					found[i] = guessedString.charAt(0);
 
@@ -74,7 +73,15 @@ public class MainGameFunc {
 				
 			}
 			
+			if (found == secretWord.toCharArray()) {
+				
+				System.out.println("Congrats you won!");
+				
+			}
+			
 		}
+		
+		System.out.println(secretWord);
 
 	}
 
