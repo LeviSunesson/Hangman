@@ -30,7 +30,7 @@ public class MainGameFunc {
 			DIFFICULTY = 1;
 		}
 
-		System.out.println("difficulty choosen: " + DIFFICULTY);
+		System.out.println("Difficulty chosen: " + DIFFICULTY);
 
 		LIVES = (int) (10/Math.sqrt(DIFFICULTY));
 
