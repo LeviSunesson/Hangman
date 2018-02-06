@@ -38,15 +38,19 @@ public class MainGameFunc {
 
 	private static void Questions() throws FileNotFoundException {
 
+		int lives = LIVES;
+
 		String secretWord = GetWord(new File("Words.txt"));
 		char[] found = secretWord.toCharArray();
 		for(int i = 0 ; i < found.length ; i++) {
 			found[i] = '_';
 		}
 
+		boolean won = false;
+
 		boolean wrong = false;
-		
-		while( LIVES > 0 ) {
+
+		while( lives > 0 && !won) {
 
 			System.out.println(" ");
 			System.out.println("Guess a letter!");
@@ -59,7 +63,7 @@ public class MainGameFunc {
 					found[i] = guessedString.charAt(0);
 
 					System.out.println(found[i]);
-					
+
 					wrong = true;
 
 				}
@@ -68,19 +72,24 @@ public class MainGameFunc {
 			printCharArr(found);
 
 			if ( wrong == false ) {
-				
-				LIVES--;
-				
+
+				lives--;
+
 			}
-			
-			if (found == secretWord.toCharArray()) {
-				
+
+			wrong = false;
+
+			System.out.println("");
+			PaintMan.print(lives);
+
+			if (found.equals(secretWord.toCharArray()) ) {
+
 				System.out.println("Congrats you won!");
-				
+				won = true;
 			}
-			
+
 		}
-		
+
 		System.out.println(secretWord);
 
 	}
@@ -100,15 +109,15 @@ public class MainGameFunc {
 		return words.get((int) (Math.random()*words.size()));
 
 	}
-	
+
 	private static void printCharArr(char[] print) {
-		
+
 		for(char c : print) {
 
 			System.out.print(c + " ");
 
 		}
-		
+
 	}
 }
 
