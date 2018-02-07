@@ -77,6 +77,7 @@ public class MainGameFunc {
 		while( lives > 0 && !won) {
 
 			System.out.println(" ");
+
 			System.out.println("Guess a letter!");
 
 			String guessedString = input.next();
@@ -109,9 +110,9 @@ public class MainGameFunc {
 				PaintMan.print(lives);
 
 			}else if( guessedArr.contains(guessedString) ) {
-				
+
 				System.out.println("You have all ready guessed that");
-				
+
 			}
 
 			guessedArr.add(guessedString);
@@ -122,6 +123,9 @@ public class MainGameFunc {
 				won = true;
 				break;
 			}
+
+
+			System.out.println(guessedArr);
 
 		}
 
@@ -175,6 +179,8 @@ public class MainGameFunc {
 
 			if ( answer.equals("Y") ) {
 
+				guessedArr.removeAll(guessedArr);
+				
 				Start();
 				Questions();
 				done = true;
