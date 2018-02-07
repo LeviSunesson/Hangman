@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Scanner;
+import java.util.ArrayList;
 
 public class MainGameFunc {
 
@@ -8,11 +9,33 @@ public class MainGameFunc {
 
 	public static int LIVES;
 
+	private static ArrayList<String> WORDS = new ArrayList<String>();
+	
 	private static Scanner input = new Scanner(System.in);
 
+	private static void Setup(File Words) throws FileNotFoundException {
+		
+		Scanner fileReader = new Scanner(Words);
+
+		while ( fileReader.hasNextLine() ) {
+			WORDS.add(fileReader.nextLine());
+		}
+
+		fileReader.close();
+		
+		while( WORDS.size() > 20 ) {
+			
+			WORDS.remove((int) (Math.random()*WORDS.size()));
+			
+		}
+		
+		System.out.println("Welcome to HangMan!");
+		
+	}
+	
 	public static void Run() throws FileNotFoundException {
 
-		System.out.println("Welcome to HangMan!");
+		Setup(new File("Words.txt"));
 		Start();	
 		Questions();
 	}
@@ -35,11 +58,11 @@ public class MainGameFunc {
 
 	}
 
-	private static void Questions() throws FileNotFoundException {
+	private static void Questions() {
 
 		int lives = LIVES;
 
-		String secretWord = GetWord(new File("Words.txt"));
+		String secretWord = GetWord();
 		char[] found = secretWord.toCharArray();
 		for(int i = 0 ; i < found.length ; i++) {
 			found[i] = '_';
@@ -113,23 +136,13 @@ public class MainGameFunc {
 
 	}
 
-	private static String GetWord(File Words) throws FileNotFoundException {
+	private static String GetWord() {
 
-		Scanner fileReader = new Scanner(Words);
-
-		ArrayList<String> words = new ArrayList<String>();
-
-		while ( fileReader.hasNextLine() ) {
-			words.add(fileReader.nextLine());
-		}
-
-		fileReader.close();
-
-		return words.get((int) (Math.random()*words.size()));
+		return WORDS.get((int) (Math.random()*WORDS.size()));
 
 	}
 
-	private static void End() throws FileNotFoundException {
+	private static void End() {
 
 		boolean done = false;
 
