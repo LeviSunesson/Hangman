@@ -10,11 +10,13 @@ public class MainGameFunc {
 	public static int LIVES;
 
 	private static ArrayList<String> WORDS = new ArrayList<String>();
-	
+
+	private static ArrayList<String> guessedArr = new ArrayList<String>();
+
 	private static Scanner input = new Scanner(System.in);
 
 	private static void Setup(File Words) throws FileNotFoundException {
-		
+
 		Scanner fileReader = new Scanner(Words);
 
 		while ( fileReader.hasNextLine() ) {
@@ -22,17 +24,17 @@ public class MainGameFunc {
 		}
 
 		fileReader.close();
-		
+
 		while( WORDS.size() > 20 ) {
-			
+
 			WORDS.remove((int) (Math.random()*WORDS.size()));
-			
+
 		}
-		
+
 		System.out.println("Welcome to HangMan!");
-		
+
 	}
-	
+
 	public static void Run() throws FileNotFoundException {
 
 		Setup(new File("Words.txt"));
@@ -80,32 +82,41 @@ public class MainGameFunc {
 			String guessedString = input.next();
 			guessedString = guessedString.toUpperCase();
 
-			for (int i = 0 ; i < found.length ; i++) {
-				if ( guessedString.charAt(0) == secretWord.charAt(i) ) {
-					found[i] = guessedString.charAt(0);
+			if ( !guessedArr.contains(guessedString) ) {
 
-					System.out.println(found[i]);
+				for (int i = 0 ; i < found.length ; i++) {
+					if ( guessedString.charAt(0) == secretWord.charAt(i) ) {
+						found[i] = guessedString.charAt(0);
 
-					wrong = true;
+						System.out.println(found[i]);
+
+						wrong = true;
+
+					}
+				}
+
+				printCharArr(found);
+
+				if ( wrong == false ) {
+
+					lives--;
 
 				}
+
+				wrong = false;
+
+				System.out.println("");
+				PaintMan.print(lives);
+
+			}else if( guessedArr.contains(guessedString) ) {
+				
+				System.out.println("You have all ready guessed that");
+				
 			}
 
-			printCharArr(found);
-
-			if ( wrong == false ) {
-
-				lives--;
-
-			}
-
-			wrong = false;
-
-			System.out.println("");
-			PaintMan.print(lives);
+			guessedArr.add(guessedString);
 
 			String foundd = new String(found);
-
 			if (foundd.equals(secretWord) ) {
 
 				won = true;
@@ -147,7 +158,7 @@ public class MainGameFunc {
 		boolean done = false;
 
 		System.out.println("");
-		System.out.println("Do you want to play again? ( Y/ N )");
+		System.out.println("Do you want to play again? ( Y / N )");
 
 		String answer = input.next();
 
