@@ -12,13 +12,12 @@ public class MainGameFunc {
 
 	public static void Run() throws FileNotFoundException {
 
+		System.out.println("Welcome to HangMan!");
 		Start();	
 		Questions();
 	}
 
 	private static void Start() {
-
-		System.out.println("Welcome to HangMan!");
 
 		System.out.println("Choose difficulty ( 1 , 2 , 3 )");
 		DIFFICULTY = input.nextInt();
@@ -70,20 +69,20 @@ public class MainGameFunc {
 			}
 
 			printCharArr(found);
-			
+
 			if ( wrong == false ) {
 
 				lives--;
 
 			}
-			
+
 			wrong = false;
 
 			System.out.println("");
 			PaintMan.print(lives);
 
 			String foundd = new String(found);
-			
+
 			if (foundd.equals(secretWord) ) {
 
 				won = true;
@@ -93,25 +92,27 @@ public class MainGameFunc {
 		}
 
 		if ( !won ) {
-			
+
 			System.out.println("You lost the word was: ");
-			
+
 		} else if ( won ){
-			
+
 			System.out.println("You Won! The word was: ");
-			
+
 		}
-		
-		
+
+
 		secretWord = secretWord.toLowerCase();
 		char[] a = secretWord.toCharArray();
 		a[0] = Character.toUpperCase(a[0]);
 		String b = new String(a);
-		
+
 		System.out.print(b);
 
+		End();
+
 	}
-	
+
 	private static String GetWord(File Words) throws FileNotFoundException {
 
 		Scanner fileReader = new Scanner(Words);
@@ -126,6 +127,42 @@ public class MainGameFunc {
 
 		return words.get((int) (Math.random()*words.size()));
 
+	}
+
+	private static void End() throws FileNotFoundException {
+
+		boolean done = false;
+
+		System.out.println("");
+		System.out.println("Do you want to play again? ( Y/ N )");
+
+		String answer = input.next();
+
+		answer = answer.toUpperCase();
+		while ( !done ) {
+			if ( !answer.equals("Y") || !answer.equals("N") ) {
+
+				System.out.println(" Y or N ");
+
+				answer = input.next();
+				answer = answer.toUpperCase();
+
+			}
+
+			if ( answer.equals("Y") ) {
+
+				Start();
+				Questions();
+				done = true;
+
+			}
+
+			if ( answer.equals("N")) {
+
+				done = true;
+
+			}	
+		}
 	}
 
 	private static void printCharArr(char[] print) {
