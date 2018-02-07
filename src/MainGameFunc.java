@@ -110,13 +110,15 @@ public class MainGameFunc {
 				System.out.println("");
 				PaintMan.print(lives);
 
+				guessedArr.add(guessedString);
+
 			}else if( guessedArr.contains(guessedString) ) {
 
 				System.out.println("You have all ready guessed that");
 
 			}
 
-			guessedArr.add(guessedString);
+
 
 			String foundd = new String(found);
 			if (foundd.equals(secretWord) ) {
@@ -162,6 +164,15 @@ public class MainGameFunc {
 
 		boolean done = false;
 
+		if ( WORDS.size() < 1 ) {
+
+			System.out.println("");
+			System.out.println("You have completed the entire game!");
+
+			return;
+
+		} 
+
 		System.out.println("");
 		System.out.println("Do you want to play again? ( Y / N )");
 
@@ -169,19 +180,10 @@ public class MainGameFunc {
 
 		answer = answer.toUpperCase();
 		while ( !done ) {
-			if ( !answer.equals("Y") || !answer.equals("N") ) {
-
-				System.out.println(" Y or N ");
-
-				answer = input.next();
-				answer = answer.toUpperCase();
-
-			}
-
 			if ( answer.equals("Y") ) {
 
 				guessedArr.removeAll(guessedArr);
-				
+
 				Start();
 				Questions();
 				done = true;
@@ -192,7 +194,19 @@ public class MainGameFunc {
 
 				done = true;
 
-			}	
+				return;
+
+			}
+			if ( !answer.equals("Y") || !answer.equals("N") ) {
+
+				System.out.println(" Y or N ");
+
+				answer = input.next();
+				answer = answer.toUpperCase();
+
+			}
+
+
 		}
 	}
 
