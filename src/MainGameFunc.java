@@ -65,6 +65,7 @@ public class MainGameFunc {
 		int lives = LIVES;
 
 		String secretWord = GetWord();
+		WORDS.remove(secretWord);
 		char[] found = secretWord.toCharArray();
 		for(int i = 0 ; i < found.length ; i++) {
 			found[i] = '_';
