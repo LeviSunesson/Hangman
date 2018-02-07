@@ -82,18 +82,36 @@ public class MainGameFunc {
 			System.out.println("");
 			PaintMan.print(lives);
 
-			if (found.equals(secretWord.toCharArray()) ) {
+			String foundd = new String(found);
+			
+			if (foundd.equals(secretWord) ) {
 
-				System.out.println("Congrats you won!");
 				won = true;
+				break;
 			}
 
 		}
 
-		System.out.println(secretWord);
+		if ( !won ) {
+			
+			System.out.println("You lost the word was: ");
+			
+		} else if ( won ){
+			
+			System.out.println("You Won! The word was: ");
+			
+		}
+		
+		
+		secretWord = secretWord.toLowerCase();
+		char[] a = secretWord.toCharArray();
+		a[0] = Character.toUpperCase(a[0]);
+		String b = new String(a);
+		
+		System.out.print(b);
 
 	}
-
+	
 	private static String GetWord(File Words) throws FileNotFoundException {
 
 		Scanner fileReader = new Scanner(Words);
