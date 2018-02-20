@@ -44,15 +44,35 @@ public class MainGameFunc {
 
 	private static void Start() {
 
-		System.out.println("Choose difficulty ( 1 , 2 , 3 )");
-		DIFFICULTY = input.nextInt();
+		boolean state = false;
 
-		if ( DIFFICULTY > 3 ) {
-			DIFFICULTY = 3;
+		ArrayList<String> nubm = new ArrayList<String>();
+
+		nubm.add("1");
+		nubm.add("2");
+		nubm.add("3");
+
+		System.out.println("Choose difficulty " + nubm);
+		String diff = input.next();
+
+		while(!state) {
+
+			if( nubm.contains(diff)) {
+
+				DIFFICULTY = Integer.parseInt(diff);
+
+				state = true;
+
+			}else {
+
+				System.out.println(nubm);
+
+				diff = input.next();
+
+			}
 		}
-		if ( DIFFICULTY < 1 ) {
-			DIFFICULTY = 1;
-		}
+
+		state = false;
 
 		System.out.println("Difficulty chosen: " + DIFFICULTY);
 
