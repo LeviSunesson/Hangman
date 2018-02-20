@@ -25,7 +25,7 @@ public class MainGameFunc {
 
 		fileReader.close();
 
-		while( WORDS.size() > 20 ) {
+		while( WORDS.size() > 10 ) {
 
 			WORDS.remove((int) (Math.random()*WORDS.size()));
 
@@ -65,7 +65,7 @@ public class MainGameFunc {
 		int lives = LIVES;
 
 		String secretWord = GetWord();
-		WORDS.remove(secretWord);
+		
 		char[] found = secretWord.toCharArray();
 		for(int i = 0 ; i < found.length ; i++) {
 			found[i] = '_';
@@ -114,7 +114,7 @@ public class MainGameFunc {
 
 			}else if( guessedArr.contains(guessedString) ) {
 
-				System.out.println("You have all ready guessed that");
+				System.out.println("You have already guessed that");
 
 			}
 
@@ -134,14 +134,16 @@ public class MainGameFunc {
 
 		if ( !won ) {
 
-			System.out.println("You lost the word was: ");
-
+			System.out.println("You lost, the word was: ");
+			
+			
 		} else if ( won ){
 
 			System.out.println("You Won! The word was: ");
 
+			WORDS.remove(secretWord);
+			
 		}
-
 
 		secretWord = secretWord.toLowerCase();
 		char[] a = secretWord.toCharArray();
@@ -177,8 +179,8 @@ public class MainGameFunc {
 		System.out.println("Do you want to play again? ( Y / N )");
 
 		String answer = input.next();
-
 		answer = answer.toUpperCase();
+
 		while ( !done ) {
 			if ( answer.equals("Y") ) {
 
