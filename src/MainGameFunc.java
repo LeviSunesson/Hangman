@@ -66,6 +66,8 @@ public class MainGameFunc {
 				WORDS.remove((int) (Math.random()*WORDS.size()));
 
 			}
+		
+			StartSingelplayer();
 			
 		}else if (GAMEMODE.equals("M")) {
 			
@@ -81,12 +83,11 @@ public class MainGameFunc {
 
 	public static void Run() throws FileNotFoundException {
 
-		Setup(new File("Words.txt"));
-		Start();	
+		Setup(new File("Words.txt"));	
 		Questions();
 	}
 
-	private static void Start() {
+	private static void StartSingelplayer() {
 
 		boolean state = false;
 
@@ -110,6 +111,44 @@ public class MainGameFunc {
 			}else {
 
 				System.out.println(nubm);
+
+				diff = input.next();
+
+			}
+		}
+
+		state = false;
+
+		System.out.println("Difficulty chosen: " + DIFFICULTY);
+
+		LIVES = (int) (10/Math.sqrt(DIFFICULTY));
+
+	}
+	
+	private static void StartMultiplayer() {
+
+		boolean state = false;
+
+		ArrayList<String> number = new ArrayList<String>();
+
+		number.add("1");
+		number.add("2");
+		number.add("3");
+
+		System.out.println("Choose difficulty " + number);
+		String diff = input.next();
+
+		while(!state) {
+
+			if( number.contains(diff)) {
+
+				DIFFICULTY = Integer.parseInt(diff);
+
+				state = true;
+
+			}else {
+
+				System.out.println(number);
 
 				diff = input.next();
 
@@ -250,7 +289,7 @@ public class MainGameFunc {
 
 				guessedArr.removeAll(guessedArr);
 
-				Start();
+				StartSingelplayer();
 				Questions();
 				done = true;
 
