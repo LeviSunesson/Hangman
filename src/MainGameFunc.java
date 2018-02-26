@@ -7,6 +7,8 @@ public class MainGameFunc {
 
 	public static int DIFFICULTY;
 
+	public static String GAMEMODE;
+	
 	public static int LIVES;
 
 	private static ArrayList<String> WORDS = new ArrayList<String>();
@@ -17,22 +19,64 @@ public class MainGameFunc {
 
 	private static void Setup(File Words) throws FileNotFoundException {
 
-		Scanner fileReader = new Scanner(Words);
-
-		while ( fileReader.hasNextLine() ) {
-			WORDS.add(fileReader.nextLine());
-		}
-
-		fileReader.close();
-
-		while( WORDS.size() > 10 ) {
-
-			WORDS.remove((int) (Math.random()*WORDS.size()));
-
-		}
-
 		System.out.println("Welcome to HangMan!");
+		
+		boolean state = false;
 
+		ArrayList<String> ans = new ArrayList<String>();
+
+		ans.add("S");
+		ans.add("M");
+
+		System.out.println("Singleplayer or Multiplayer" + ans);
+		String diff = input.next().toUpperCase();
+		
+
+		while(!state) {
+
+			if( ans.contains(diff)) {
+
+				GAMEMODE = diff;
+
+				state = true;
+
+			}else {
+
+				System.out.println(ans);
+
+				diff = input.next();
+
+			}
+		}
+
+		state = false;
+		
+		if (GAMEMODE.equals("S")) {
+			
+			Scanner fileReader = new Scanner(Words);
+
+			while ( fileReader.hasNextLine() ) {
+				WORDS.add(fileReader.nextLine());
+			}
+
+			fileReader.close();
+
+			while( WORDS.size() > 10 ) {
+
+				WORDS.remove((int) (Math.random()*WORDS.size()));
+
+			}
+			
+		}else if (GAMEMODE.equals("M")) {
+			
+			System.out.println("The Secret Word");
+			
+			String word = input.next();
+			
+			WORDS.add(word.toUpperCase());
+			
+		}
+		
 	}
 
 	public static void Run() throws FileNotFoundException {
