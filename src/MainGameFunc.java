@@ -8,7 +8,7 @@ public class MainGameFunc {
 	public static int DIFFICULTY;
 
 	public static String GAMEMODE;
-	
+
 	public static int LIVES;
 
 	private static ArrayList<String> WORDS = new ArrayList<String>();
@@ -20,7 +20,7 @@ public class MainGameFunc {
 	private static void Setup(File Words) throws FileNotFoundException {
 
 		System.out.println("Welcome to HangMan!");
-		
+
 		boolean state = false;
 
 		ArrayList<String> ans = new ArrayList<String>();
@@ -30,7 +30,7 @@ public class MainGameFunc {
 
 		System.out.println("Singleplayer or Multiplayer" + ans);
 		String diff = input.next().toUpperCase();
-		
+
 
 		while(!state) {
 
@@ -50,9 +50,9 @@ public class MainGameFunc {
 		}
 
 		state = false;
-		
+
 		if (GAMEMODE.equals("S")) {
-			
+
 			Scanner fileReader = new Scanner(Words);
 
 			while ( fileReader.hasNextLine() ) {
@@ -66,19 +66,21 @@ public class MainGameFunc {
 				WORDS.remove((int) (Math.random()*WORDS.size()));
 
 			}
-		
+
 			StartSingelplayer();
-			
+
 		}else if (GAMEMODE.equals("M")) {
-			
+
 			System.out.println("The Secret Word");
-			
+
 			String word = input.next();
-			
+
 			WORDS.add(word.toUpperCase());
-			
+
+			StartMultiplayer();
+
 		}
-		
+
 	}
 
 	public static void Run() throws FileNotFoundException {
@@ -124,7 +126,7 @@ public class MainGameFunc {
 		LIVES = (int) (10/Math.sqrt(DIFFICULTY));
 
 	}
-	
+
 	private static void StartMultiplayer() {
 
 		boolean state = false;
@@ -168,7 +170,7 @@ public class MainGameFunc {
 		int lives = LIVES;
 
 		String secretWord = GetWord();
-		
+
 		char[] found = secretWord.toCharArray();
 		for(int i = 0 ; i < found.length ; i++) {
 			found[i] = '_';
@@ -238,14 +240,14 @@ public class MainGameFunc {
 		if ( !won ) {
 
 			System.out.println("You lost, the word was: ");
-			
-			
+
+
 		} else if ( won ){
 
 			System.out.println("You Won! The word was: ");
 
 			WORDS.remove(secretWord);
-			
+
 		}
 
 		secretWord = secretWord.toLowerCase();
@@ -267,52 +269,60 @@ public class MainGameFunc {
 
 	private static void End() {
 
-		boolean done = false;
+		if (GAMEMODE.equals("S")) {
 
-		if ( WORDS.size() < 1 ) {
+			boolean done = false;
 
-			System.out.println("");
-			System.out.println("You have completed the entire game!");
+			if ( WORDS.size() < 1 ) {
 
-			return;
-
-		} 
-
-		System.out.println("");
-		System.out.println("Do you want to play again? ( Y / N )");
-
-		String answer = input.next();
-		answer = answer.toUpperCase();
-
-		while ( !done ) {
-			if ( answer.equals("Y") ) {
-
-				guessedArr.removeAll(guessedArr);
-
-				StartSingelplayer();
-				Questions();
-				done = true;
-
-			}
-
-			if ( answer.equals("N")) {
-
-				done = true;
+				System.out.println("");
+				System.out.println("You have completed the entire game!");
 
 				return;
 
+			} 
+
+			System.out.println("");
+			System.out.println("Do you want to play again? ( Y / N )");
+
+			String answer = input.next();
+			answer = answer.toUpperCase();
+
+			while ( !done ) {
+				if ( answer.equals("Y") ) {
+
+					guessedArr.removeAll(guessedArr);
+
+					StartSingelplayer();
+					Questions();
+					done = true;
+
+				}
+
+				if ( answer.equals("N")) {
+
+					done = true;
+
+					return;
+
+				}
+				if ( !answer.equals("Y") || !answer.equals("N") ) {
+
+					System.out.println(" Y or N ");
+
+					answer = input.next();
+					answer = answer.toUpperCase();
+
+				}
+
 			}
-			if ( !answer.equals("Y") || !answer.equals("N") ) {
-
-				System.out.println(" Y or N ");
-
-				answer = input.next();
-				answer = answer.toUpperCase();
-
-			}
-
 
 		}
+		
+		if (GAMEMODE.equals("M")) {
+			
+		}
+
 	}
 
 	private static void printCharArr(char[] print) {
