@@ -16,4 +16,16 @@ public class Player {
 		
 	}
 	
+	public static int getLives() {
+		
+		return LIVES;
+		
+	}
+	
+	public static int getPoints() {
+		
+		return POINTS;
+		
+	}
+	
 }
