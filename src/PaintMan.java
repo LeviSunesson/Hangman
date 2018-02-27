@@ -172,4 +172,15 @@ public class PaintMan {
 		System.out.println("          ");
 
 	}
+	
+	public static void printCharArr(char[] print) {
+		
+		for(char c : print ) {
+			
+			System.out.print(c + " ");
+			
+		}
+		
+	}
+	
 }
