@@ -1,5 +1,3 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -20,114 +18,22 @@ public class functionsMP {
 
 	private static Scanner input = new Scanner(System.in);
 
-	private static void Setup(File Words) throws FileNotFoundException {
+	private static void Setup(){
 
-		System.out.println("Welcome to HangMan!");
+		System.out.println("The Secret Word");
 
-		boolean state = false;
+		String word = input.next();
 
-		ArrayList<String> ans = new ArrayList<String>();
+		WORDS.add(word.toUpperCase());
 
-		ans.add("S");
-		ans.add("M");
-
-		System.out.println("Singleplayer or Multiplayer" + ans);
-		String diff = input.next().toUpperCase();
-
-
-		while(!state) {
-
-			if( ans.contains(diff)) {
-
-				GAMEMODE = diff;
-
-				state = true;
-
-			}else {
-
-				System.out.println(ans);
-
-				diff = input.next();
-
-			}
-		}
-
-		state = false;
-
-		if (GAMEMODE.equals("S")) {
-
-			Scanner fileReader = new Scanner(Words);
-
-			while ( fileReader.hasNextLine() ) {
-				WORDS.add(fileReader.nextLine());
-			}
-
-			fileReader.close();
-
-			Player singleplayer = new Player();
-
-			players.add(singleplayer);
-
-			StartSingelplayer();
-
-		}else if (GAMEMODE.equals("M")) {
-
-			System.out.println("The Secret Word");
-
-			String word = input.next();
-
-			WORDS.add(word.toUpperCase());
-
-			StartMultiplayer();
-
-		}
+		StartMultiplayer();
 
 	}
 
-	public static void Run() throws FileNotFoundException {
+	public static void Run() {
 
-		Setup(new File("Words.txt"));	
+		Setup();	
 		Questions();
-	}
-
-	private static void StartSingelplayer() {
-
-		boolean state = false;
-
-		ArrayList<String> nubm = new ArrayList<String>();
-
-		nubm.add("1");
-		nubm.add("2");
-		nubm.add("3");
-
-		System.out.println("Choose difficulty " + nubm);
-		String diff = input.next();
-
-		while(!state) {
-
-			if( nubm.contains(diff)) {
-
-				DIFFICULTY = Integer.parseInt(diff);
-
-				state = true;
-
-			}else {
-
-				System.out.println(nubm);
-
-				diff = input.next();
-
-			}
-		}
-
-		state = false;
-
-		System.out.println("Difficulty chosen: " + DIFFICULTY);
-
-		players.get(0);
-		Player.setLives((int) (10/Math.sqrt(DIFFICULTY)));
-
-
 	}
 
 	private static void StartMultiplayer() {
@@ -205,7 +111,7 @@ public class functionsMP {
 					}
 				}
 
-				printCharArr(found);
+				PaintMan.printCharArr(found);
 
 				if ( wrong == false ) {
 
@@ -297,7 +203,6 @@ public class functionsMP {
 
 					guessedArr.removeAll(guessedArr);
 
-					StartSingelplayer();
 					Questions();
 					done = true;
 
@@ -324,16 +229,6 @@ public class functionsMP {
 		}
 
 		if (GAMEMODE.equals("M")) {
-
-		}
-
-	}
-
-	private static void printCharArr(char[] print) {
-
-		for(char c : print) {
-
-			System.out.print(c + " ");
 
 		}
 
