@@ -15,6 +15,8 @@ public class MainGameFunc {
 
 	private static ArrayList<String> guessedArr = new ArrayList<String>();
 
+	public static ArrayList<Player> players = new ArrayList<Player>();
+	
 	private static Scanner input = new Scanner(System.in);
 
 	private static void Setup(File Words) throws FileNotFoundException {
@@ -61,12 +63,10 @@ public class MainGameFunc {
 
 			fileReader.close();
 
-			while( WORDS.size() > 10 ) {
-
-				WORDS.remove((int) (Math.random()*WORDS.size()));
-
-			}
-
+			Player singleplayer = new Player();
+			
+			players.add(singleplayer);
+			
 			StartSingelplayer();
 
 		}else if (GAMEMODE.equals("M")) {
@@ -123,7 +123,9 @@ public class MainGameFunc {
 
 		System.out.println("Difficulty chosen: " + DIFFICULTY);
 
-		LIVES = (int) (10/Math.sqrt(DIFFICULTY));
+		players.get(0);
+		Player.setLives((int) (10/Math.sqrt(DIFFICULTY)));
+		
 
 	}
 
@@ -167,7 +169,7 @@ public class MainGameFunc {
 
 	private static void Questions() {
 
-		int lives = LIVES;
+		players.get(0);
 
 		String secretWord = GetWord();
 
@@ -180,7 +182,7 @@ public class MainGameFunc {
 
 		boolean wrong = false;
 
-		while( lives > 0 && !won) {
+		while( Player.LIVES > 0 && !won) {
 
 			System.out.println(" ");
 
@@ -206,14 +208,14 @@ public class MainGameFunc {
 
 				if ( wrong == false ) {
 
-					lives--;
+					Player.loseLife();
 
 				}
 
 				wrong = false;
 
 				System.out.println("");
-				PaintMan.print(lives);
+				PaintMan.print(Player.getLives());
 
 				guessedArr.add(guessedString);
 
@@ -246,7 +248,7 @@ public class MainGameFunc {
 
 			System.out.println("You Won! The word was: ");
 
-			WORDS.remove(secretWord);
+			Player.addPoint();
 
 		}
 
@@ -273,7 +275,8 @@ public class MainGameFunc {
 
 			boolean done = false;
 
-			if ( WORDS.size() < 1 ) {
+			players.get(0);
+			if ( Player.getPoints() == 2 ) {
 
 				System.out.println("");
 				System.out.println("You have completed the entire game!");
