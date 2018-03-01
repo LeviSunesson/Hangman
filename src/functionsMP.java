@@ -8,8 +8,8 @@ public class functionsMP {
 
 	public static String GAMEMODE;
 
-	public static int LIVES;
-
+	public static int LEVEL;
+	
 	private static ArrayList<String> WORDS = new ArrayList<String>();
 
 	private static ArrayList<String> guessedArr = new ArrayList<String>();
@@ -20,14 +20,59 @@ public class functionsMP {
 
 	private static void Setup(){
 
+		Player player1 = new Player();
+		
+		Player player2 = new Player();
+		
+		ArrayList<String> levels = new ArrayList<String>();
+		
+		for (int j = 1; j <= 5; j++) {
+			
+			String s = "" + j;
+			
+			levels.add(s);
+			
+		}
+		
+		boolean state = false;
+		
+		System.out.println("Number of rounds " + levels);
+		
+		String diff = input.next();
+
+		while(!state) {
+
+			if( levels.contains(diff)) {
+
+				LEVEL = Integer.parseInt(diff);
+
+				state = true;
+
+			}else {
+
+				System.out.println(levels);
+
+				diff = input.next();
+
+			}
+		}
+
+		state = false;
+		
+		getWord();
+
+		StartMultiplayer();
+
+	}
+	
+	private static void getWord() {
+		
 		System.out.println("The Secret Word");
 
 		String word = input.next();
 
 		WORDS.add(word.toUpperCase());
-
-		StartMultiplayer();
-
+		
 	}
 
 	public static void Run() {
@@ -70,15 +115,15 @@ public class functionsMP {
 
 		System.out.println("Difficulty chosen: " + DIFFICULTY);
 
-		LIVES = (int) (10/Math.sqrt(DIFFICULTY));
+		Player.setLives((int) (10/Math.sqrt(DIFFICULTY)));
 
 	}
 
 	private static void Questions() {
 
-		players.get(0);
+		//players.get(0);
 
-		String secretWord = GetWord();
+		String secretWord = WORDS.get(0);
 
 		char[] found = secretWord.toCharArray();
 		for(int i = 0 ; i < found.length ; i++) {
@@ -170,65 +215,49 @@ public class functionsMP {
 
 	}
 
-	private static String GetWord() {
-
-		return WORDS.get((int) (Math.random()*WORDS.size()));
-
-	}
-
 	private static void End() {
 
-		if (GAMEMODE.equals("S")) {
+		boolean done = false;
 
-			boolean done = false;
+		//players.get(0);
+		if ( Player.getPoints() == 2 ) {
 
-			players.get(0);
-			if ( Player.getPoints() == 2 ) {
+			System.out.println("");
+			System.out.println("You have completed the entire game!");
 
-				System.out.println("");
-				System.out.println("You have completed the entire game!");
+			return;
+
+		} 
+
+		System.out.println("");
+		System.out.println("Do you want to play again? ( Y / N )");
+
+		String answer = input.next();
+		answer = answer.toUpperCase();
+
+		while ( !done ) {
+			if ( answer.equals("Y") ) {
+
+				guessedArr.removeAll(guessedArr);
+
+				getWord();
+				Questions();
+				done = true;
+
+			}else if ( answer.equals("N")) {
+
+				done = true;
 
 				return;
 
-			} 
+			}else if ( !answer.equals("Y") || !answer.equals("N") ) {
 
-			System.out.println("");
-			System.out.println("Do you want to play again? ( Y / N )");
+				System.out.println(" Y or N ");
 
-			String answer = input.next();
-			answer = answer.toUpperCase();
-
-			while ( !done ) {
-				if ( answer.equals("Y") ) {
-
-					guessedArr.removeAll(guessedArr);
-
-					Questions();
-					done = true;
-
-				}
-
-				if ( answer.equals("N")) {
-
-					done = true;
-
-					return;
-
-				}
-				if ( !answer.equals("Y") || !answer.equals("N") ) {
-
-					System.out.println(" Y or N ");
-
-					answer = input.next();
-					answer = answer.toUpperCase();
-
-				}
+				answer = input.next();
+				answer = answer.toUpperCase();
 
 			}
-
-		}
-
-		if (GAMEMODE.equals("M")) {
 
 		}
 

@@ -1,4 +1,3 @@
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,9 +27,9 @@ public class GameStart {
 		ArrayList<String> ans = new ArrayList<String>();
 
 		ans.add("S");
-		ans.add("M");
+		ans.add("D");
 
-		System.out.println("Singleplayer or Multiplayer" + ans);
+		System.out.println("Singleplayer or Dualplayer" + ans);
 		String diff = input.next().toUpperCase();
 
 		while(!state) {
@@ -56,7 +55,7 @@ public class GameStart {
 
 			MainGameFunc.Run();
 
-		}else if (GAMEMODE.equals("M")) {
+		}else if (GAMEMODE.equals("D")) {
 
 			functionsMP.Run();
 

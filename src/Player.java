@@ -10,8 +10,8 @@ public class Player {
 
 	Player(int life, int point) {
 
-		this.LIVES  = life;
-		this.POINTS = point;
+		LIVES  = life;
+		POINTS = point;
 
 	}
 
